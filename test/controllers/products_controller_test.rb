@@ -17,4 +17,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_equal ["id", "name", "price", "image_url", "description", "created_at", "updated_at"], data.keys
   end
 
+  test "create" do
+    assert_difference "Product.count", 1 do
+      post "/products.json", params: { name: "tomato", price: 2, image_url: "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg", description: "shiny, red, straight from the vine."}
+      assert_response 200
+    end
+  end
 end

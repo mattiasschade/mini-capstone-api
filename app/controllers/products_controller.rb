@@ -10,7 +10,23 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(name: "Spinach", price: 3, image_url: "http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcSMhJ4Gdj8tbvRCcnK5wScleb_Ks6kK78EtNDz1Yz5Z4OQUtzOJaKN4moODiz5-wLbe0oK8NFnS6_vSVtc", description: "Popeye swears by the stuff.")
+    @product = Product.new(
+      name: params[:name],
+      price: params[:price],
+      image_url: params[:image_url],
+      description: params[:description]
+    )
+    @product.save
+    render :show
+  end
+
+  def update
+    @product = Product.find_by(id: params[:id])
+    @product.name = "turtle"
+    @product.price = 50
+    @product.image_url = "test_url"
+    @product.description = "not too fast."
+
     @product.save
     render :show
   end
