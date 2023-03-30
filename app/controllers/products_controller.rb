@@ -5,9 +5,8 @@ class ProductsController < ApplicationController
     render template: "products/show"
   end
 
-  def all
-    p "hello"
+  def index
     @products = Product.all
-    render template: "products/index"
+    render :index
   end
 end
