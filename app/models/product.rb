@@ -3,10 +3,11 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :description, length: { minimum: 8 }
 
-  
-  
-  
-  
+  def supplier
+    Supplier.find_by(id: supplier_id)
+  end
+
+
   def is_discounted?
     if price <= 10
       return true

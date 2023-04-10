@@ -37,7 +37,4 @@ class SuppliersController < ApplicationController
 
     render json: {message: "The supplier has been successfully deleted."}
   end
-
-
-
 end
