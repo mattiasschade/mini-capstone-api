@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_18_161847) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_18_192523) do
   create_table "images", force: :cascade do |t|
     t.string "url"
     t.integer "product_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_18_161847) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
   end
 
 end

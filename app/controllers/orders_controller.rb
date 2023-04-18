@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+ 
+  before_action :authenticate_user
+
   def create
     @order = Order.new(
       user_id: current_user.id,
@@ -6,9 +9,9 @@ class OrdersController < ApplicationController
       quantity: params[:quantity],
     )
 
-    product = Product.find_by(id: params[:product_id])
+    @product = Product.find_by(id: params[:product_id])
 
-    @order.subtotal = @order.quantity * product.price
+    @order.subtotal = @order.quantity * @product.price
     @order.tax = @order.subtotal * 0.09
     @order.total = @order.subtotal + @order.tax
 
@@ -16,21 +19,14 @@ class OrdersController < ApplicationController
     render :show
   end
 
+  
   def show
-    if current_user
-      @order = Order.find_by(id: params[:id])
-      render :show
-    else
-      render json: {message: "You are not logged in."}
-    end
+    @order = Order.find_by(id: params[:id], user_id: current_user.id)
+    render :show
   end
 
   def index
-    if current_user
-      @orders = Order.all
-      render :index
-    else
-      render json: {message: "You are not logged in."}
-    end
+    @orders = current_user.orders
+    render :index
   end
 end
