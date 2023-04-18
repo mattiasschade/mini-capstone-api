@@ -14,6 +14,10 @@ class Product < ApplicationRecord
     end
   end
 
+  # def subtotal
+  #   price
+  # end
+
   def tax
     price * 0.09
   end
